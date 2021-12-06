@@ -10,25 +10,33 @@ import {
 	messageTypeDef
 } from './Messages/typeDefs';
 
+import {
+	contactMutations,
+	contactQueries,
+	contactTypeDef
+} from './Contacts/typeDefs';
 
 /*Lo mismo con los resolvers*/
-import messageResolvers from './Messages/resolvers';
-
+//import messageResolvers from './Messages/resolvers';
+import contactResolvers from './Contacts/resolvers';
 
 
 // merge the typeDefs 
 const mergedTypeDefs = mergeSchemas(
 	[
 		'scalar JSON',
-		messageTypeDef,
+		//messageTypeDef,
+		contactTypeDef,
 		//sus tydef
 	],
 	[
-		messageQueries,
+		//messageQueries,
+		contactQueries,
 		//sus queries
 	],
 	[
-		messageMutations,
+		//messageMutations,
+		contactMutations,
 		//sus mutaciones
 	]
 );
@@ -38,7 +46,8 @@ export default makeExecutableSchema({
 	typeDefs: mergedTypeDefs,
 	resolvers: merge(
 		{ JSON: GraphQLJSON }, // allows scalar JSON
-		messageResolvers,
+		//messageResolvers,
+		contactResolvers,
 		//pongan  los otros resolvers xd
 	)
 });
