@@ -10,10 +10,17 @@ import {
 	messageTypeDef
 } from './Messages/typeDefs';
 
+//Auth resolvers
+import {
+	userAuthMutations,
+	userAuthQueries,
+	userAuthTypeDef
+} from './Auth/typeDefs'
+
 
 /*Lo mismo con los resolvers*/
 import messageResolvers from './Messages/resolvers';
-
+import userAuthResolvers from './Auth/resolvers';
 
 
 // merge the typeDefs 
@@ -21,14 +28,17 @@ const mergedTypeDefs = mergeSchemas(
 	[
 		'scalar JSON',
 		messageTypeDef,
+		userAuthTypeDef,
 		//sus tydef
 	],
 	[
 		messageQueries,
+		userAuthQueries,
 		//sus queries
 	],
 	[
 		messageMutations,
+		userAuthMutations
 		//sus mutaciones
 	]
 );
@@ -39,6 +49,7 @@ export default makeExecutableSchema({
 	resolvers: merge(
 		{ JSON: GraphQLJSON }, // allows scalar JSON
 		messageResolvers,
+		userAuthResolvers
 		//pongan  los otros resolvers xd
 	)
 });
