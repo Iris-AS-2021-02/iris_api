@@ -5,16 +5,16 @@ const URL = `http://${url}:${port}/${entryPoint}`;
 
 const resolvers = {
 	Query: {
-		allUsers: (_) =>
+		allUsers : (_) =>
 			getRequest(URL, ''),
-		usersByNumber: (_, { number}) =>
+		usersByNumber: (_, { number }) =>
 			generalRequest(`${URL}/${number}`, 'GET'),
-        usersWithNumber: (_, {numbers}) =>
-            generalRequest(`${URL/find}/${numbers}`, 'GET'),
+        usersWithNumber: (_, {number}) =>
+            generalRequest(`${URL}/find/${number}`, 'GET'),
 	},
 	Mutation: {
-		createUser: (_, { UserAuth }) =>
-			generalRequest(`${URL}/`, 'POST', UserAuth),
+		createUser: (_, { userAuth }) =>
+			generalRequest(`${URL}/`, 'POST', userAuth),
 	}
 };
 
