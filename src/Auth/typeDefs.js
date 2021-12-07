@@ -11,11 +11,11 @@ export const userAuthTypeDef = `
 
 export const userAuthQueries = `
     allUsers: [UserAuth]!
-    userByNumber(number : String!): UserAuth!
+    usersByNumber(number : String!): UserAuth!
     usersWithNumber(number : String!) : [UserAuth]!
   `;
 
 export const userAuthMutations = `
-    CreateUser(userAuth : UserAuthInput!) : UserAuth
+    createUser(userAuth : UserAuthInput!) : UserAuth
 `;
 

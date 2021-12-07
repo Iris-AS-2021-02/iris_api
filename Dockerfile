@@ -1,14 +1,14 @@
 FROM node:carbon-slim
 
 # Create app directory
-WORKDIR /api_gateway
+WORKDIR /iris_api
 
 # Install app dependencies
-COPY package.json /api_gateway/
+COPY package.json /iris_api/
 RUN npm install
 
 # Bundle app source
-COPY . /api_gateway/
+COPY . /iris_api/
 RUN npm run prepublish
 
 CMD [ "npm", "run", "runServer" ]

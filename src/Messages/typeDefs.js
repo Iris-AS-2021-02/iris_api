@@ -1,28 +1,30 @@
 export const messageTypeDef = `
   type Message {
       id: String!
-      sender: User!
-      receiver: User!
+      sender: String!
+      receiver: String!
       content: String!
       time_sent: String
       time_received: String
       time_seen: String
   }
   input MessageInput {
-    receiver: User!
+    receiver: String!
     content: String!
   }
   input ConversationInput {
-    receiver: User!
-    sender: User!
-  }`;
+    receiver: String!
+    sender: String!
+  }
+  `;
 
 export const messageQueries = `
-    messages(input: ConversationInput): [Messages]
+    receiveMessage(input: ConversationInput): [Message]
   `;
 
 export const messageMutations = `
-    createMessage(message: MessageInput!): Message!
+    sendMessage(message: MessageInput!): Message!
     deleteMessage(id: String!): String
+    updateSeen(id:String!): String
 `;
 

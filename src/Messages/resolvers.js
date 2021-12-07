@@ -1,22 +1,19 @@
 import { generalRequest, getRequest } from '../utilities';
-import { url, port, entryPoint } from './server';
+import { url, port, sendMessage, receiveMessage, deleteMessage, updateSeen } from './server';
 
-const URL = `http://${url}:${port}/${entryPoint}`;
-/*Deberia cambiarlo pero estoy modificando las rutas de mi ms (._. )( ._.) por ahora dejo el ejemplo del profe*/
+const URL = `http://${url}:${port}`;
 const resolvers = {
 	Query: {
-		allCategories: (_) =>
-			getRequest(URL, ''),
-		categoryById: (_, { id }) =>
-			generalRequest(`${URL}/${id}`, 'GET'),
+		receiveMessage: (_, { id }) =>
+			generalRequest(`${URL}/${receiveMessage}/${id}`, 'GET'),
 	},
 	Mutation: {
-		createCategory: (_, { category }) =>
-			generalRequest(`${URL}/`, 'POST', category),
-		updateCategory: (_, { id, category }) =>
-			generalRequest(`${URL}/${id}`, 'PUT', category),
-		deleteCategory: (_, { id }) =>
-			generalRequest(`${URL}/${id}`, 'DELETE')
+		sendMessage: (_, { message }) =>
+			generalRequest(`${URL}/${sendMessage}`, 'POST', message),
+		updateSeen: (_, { id }) =>
+			generalRequest(`${URL}/${updateSeen}/${id}`, 'PUT'),
+		deleteMessage: (_, { id }) =>
+			generalRequest(`${URL}/${deleteMessage}/${id}`, 'DELETE')
 	}
 };
 
