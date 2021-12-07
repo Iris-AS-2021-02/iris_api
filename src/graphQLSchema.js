@@ -22,12 +22,18 @@ import {
 	userAuthTypeDef
 } from './Auth/typeDefs'
 
+import {
+	userPreferenceMutations,
+	userPreferenceQueries,
+	userPreferenceTypeDef
+} from './Preferences/typeDefs'
+
 
 /*Lo mismo con los resolvers*/
 import messageResolvers from './Messages/resolvers';
 import userAuthResolvers from './Auth/resolvers';
 import contactResolvers from './Contacts/resolvers';
-
+import userPreferenceResolvers from './Preferences/resolvers';
 
 
 // merge the typeDefs 
@@ -36,20 +42,23 @@ const mergedTypeDefs = mergeSchemas(
 		'scalar JSON',
 		messageTypeDef,
 		userAuthTypeDef,
-		contactTypeDef
+		contactTypeDef,
+		userPreferenceTypeDef,
 		//sus tydef
 	],
 	[
 		messageQueries,
 		userAuthQueries,
-		contactQueries
+		contactQueries,
+		userPreferenceQueries,
 		//sus queries
 	],
 	[
 		messageMutations,
 		userAuthMutations,
-		contactMutations
-		//sus tydef
+		contactMutations,
+		userPreferenceMutations,
+		//sus mutations
 	]
 );
 
@@ -60,7 +69,8 @@ export default makeExecutableSchema({
 		{ JSON: GraphQLJSON }, // allows scalar JSON
 		messageResolvers,
 		userAuthResolvers,
-		contactResolvers
+		contactResolvers,
+		userPreferenceResolvers
 		//pongan  los otros resolvers xd
 	)
 });
