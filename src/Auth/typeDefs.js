@@ -1,7 +1,7 @@
 
 export const userAuthTypeDef = `
   type UserAuth{
-      _id: ID!
+      ID: String
       Name: String
       Number: String
   }
