@@ -33,6 +33,6 @@ export const contactQueries = `
     `;
 
 export const contactMutations = `
-        syncronize(userId: String!, phoneContacts: [ContactEntry]!): [Contact]!
+        synchronize(userId: String!, phoneContacts: [ContactEntry]!): [Contact]!
         setSettings(contactSettings: ContactSettingsInput!): ContactSettings!
     `;
