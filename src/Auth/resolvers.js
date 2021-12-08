@@ -14,7 +14,7 @@ const resolvers = {
 	},
 	Mutation: {
 		createUser: (_, { userAuth }) =>
-			generalRequest(`${URL}/`, 'POST', userAuth),
+			generalRequest(`${URL}`, 'POST', userAuth),
 	}
 };
 
