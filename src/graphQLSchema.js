@@ -34,6 +34,12 @@ import {
 	callTypeDef
 } from './Calls/typeDefs'
 
+import {
+	stateMutations,
+	stateQueries,
+	stateTypeDef
+} from './States/typeDefs'
+
 
 /*Lo mismo con los resolvers*/
 import messageResolvers from './Messages/resolvers';
@@ -41,6 +47,7 @@ import userAuthResolvers from './Auth/resolvers';
 import contactResolvers from './Contacts/resolvers';
 import userPreferenceResolvers from './Preferences/resolvers';
 import callResolvers from './Calls/resolvers';
+import stateResolvers from './States/resolvers';
 
 
 // merge the typeDefs 
@@ -52,6 +59,7 @@ const mergedTypeDefs = mergeSchemas(
 		contactTypeDef,
 		userPreferenceTypeDef,
 		callTypeDef,
+		stateTypeDef,
 		//sus tydef
 	],
 	[
@@ -60,6 +68,7 @@ const mergedTypeDefs = mergeSchemas(
 		contactQueries,
 		userPreferenceQueries,
 		callQueries,
+		stateQueries,
 		//sus queries
 	],
 	[
@@ -68,6 +77,7 @@ const mergedTypeDefs = mergeSchemas(
 		contactMutations,
 		userPreferenceMutations,
 		callMutations,
+		stateMutations,
 		//sus mutations
 	]
 );
@@ -82,6 +92,7 @@ export default makeExecutableSchema({
 		contactResolvers,
 		userPreferenceResolvers,
 		callResolvers,
+		stateResolvers,
 		//pongan  los otros resolvers xd
 	)
 });
