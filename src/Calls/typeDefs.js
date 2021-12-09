@@ -1,7 +1,7 @@
 export const callTypeDef = `
   type call {
     call_id: Int!
-    
+    userId: String!
     call_date: String!
     call_started: String!
     call_finished: String!
@@ -9,6 +9,7 @@ export const callTypeDef = `
   }
 
   input CallInput {
+    userId: String!
     call_date: String!
     call_started: String!
     call_finished: String!
@@ -17,6 +18,7 @@ export const callTypeDef = `
 
 export const callQueries = `
   getAllCall: [call]!
+  getcallsUser(userId: String!): [call]!
 
 `;
 

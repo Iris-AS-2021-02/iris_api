@@ -11,7 +11,7 @@ const resolvers = {
 			generalRequest(`${URL}/GetContact?contactId=${contactId}`, 'GET'),
 	},
 	Mutation: {
-		syncronize: (_, { userId, phoneContacts }) =>
+		synchronize: (_, { userId, phoneContacts }) =>
 			generalRequest(`${URL}/Synchronize?userId=${userId}`, 'POST', phoneContacts),
         setSettings: (_, { contactSettings }) =>
 			generalRequest(`${URL}/ChangeOptions`, 'POST', contactSettings)
