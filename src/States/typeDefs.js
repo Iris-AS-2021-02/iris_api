@@ -53,7 +53,7 @@ export const stateQueries = `
 
 export const stateMutations = `
       createState(stateInfo: StateInput!) : resValidation
-      createUser(userInfo: UserInput!) : resValidation
+      createUserState(userInfo: UserInput!) : resValidation
       updateState(stateInfo: StateInput!) : resValidation
       deleteState(id: String!) : resValidation
       deleteUser(id: String!) : resValidation

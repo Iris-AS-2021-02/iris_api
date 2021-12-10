@@ -15,7 +15,7 @@ const resolvers = {
 	Mutation: {
 		createState: (_, { stateInfo }) =>
 			generalRequest(`${URL}/${states}`, 'POST', stateInfo),
-		createUser: (_, { userInfo }) =>
+		createUserState: (_, { userInfo }) =>
 			generalRequest(`${URL}/${users}`, 'POST', userInfo),
 		updateState: (_, { id } , { stateInfo }) =>
 			generalRequest(`${URL}/${states}/${id}`, 'PUT', stateInfo),
