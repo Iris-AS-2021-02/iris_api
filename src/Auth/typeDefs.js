@@ -4,10 +4,12 @@ export const userAuthTypeDef = `
       ID: String
       Name: String
       Number: String
+			Password: String
   }
   input UserAuthInput {
     Name: String
     Number: String
+		Password: String
   }`;
 
 export const userAuthQueries = `
