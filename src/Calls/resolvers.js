@@ -8,7 +8,8 @@ const resolvers = {
 	Query: {
 		getAllCall: (_) =>
 			getRequest(`${URL}/${'getAll'}`,''),
-            
+		getcallsUser: (_, {userId}) =>
+			generalRequest(`${URL}/getcallsUser/${userId}`, 'GET'),
         
 	},
 	Mutation: {

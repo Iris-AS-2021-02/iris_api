@@ -20,5 +20,5 @@ usersettingbyid(id : String!): UserPreference
   `;
 
 export const userPreferenceMutations = `
-usersetting(UserPreference : UserPreferenceInput) : UserPreference
+usersetting(UserPreference : UserPreferenceInput!) : UserPreference
 `;
