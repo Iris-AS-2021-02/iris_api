@@ -3,7 +3,7 @@ import { formatError } from 'graphql';
 
 /**
  * Creates a request following the given parameters
- * @param {string} url
+ * @param {string} urla
  * @param {string} method
  * @param {object} [body]
  * @param {boolean} [fullResponse]
@@ -22,11 +22,8 @@ export async function generalRequest(url, method, body, fullResponse) {
 		console.log(url);
 	}
 
-	try {
-		return await request(parameters);
-	} catch (err) {
-		return err;
-	}
+	try { return await request(parameters); } 
+	catch (err) { return err; }
 }
 
 /**
