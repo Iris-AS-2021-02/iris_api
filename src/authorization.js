@@ -1,4 +1,5 @@
 import { url, port, entryPoint } from './Auth/server';
+import { searchUserLDAP, createUserLDAP } from './Ldap/ldap'
 const jwt = require("jsonwebtoken");
 const axios = require("axios")
 
@@ -19,13 +20,47 @@ export async function login(ctx){
         ctx.response.body = { success: false, token: null };
         
         if(data.Name === payload.name){
-            ctx.response.status = 200;
-            ctx.response.body = { success: true, token: token };
+
+            let user = await searchUserLDAP(payload.phone);
+            console.log(user);
+                if(user.cn === payload.name){
+                    ctx.response.status = 200;
+                    ctx.response.body = { success: true, token: token };
+                }
         }
     }
     catch(e){
         ctx.response.status = 401;
         ctx.response.body = { success: false, token: null };
+        console.log(e);
+    }
+}
+
+export async function register(ctx){
+    const user = { Name: ctx.request.body.name, Number: ctx.request.body.phone };
+    const URL = `http://${url}:${port}/${entryPoint}`;
+    
+    try{
+        let response = await axios.post(URL, user);
+        let data = response.data;
+        
+        if (data.ID != null){
+            let createdUser = await createUserLDAP(user.Number, user.Name);
+            console.log(user);
+
+            if(createdUser != null){
+                ctx.response.status = 200;
+                ctx.response.body = { success: true, user: data };
+            }
+            else
+                throw new Error("User not created in active directory")
+            }
+        else
+            throw new Error("User not created in Iris auth ms")
+    }
+    catch(e){
+        ctx.response.status = 400;
+        ctx.response.body = { success: false, user: null };
         console.log(e);
     }
 }

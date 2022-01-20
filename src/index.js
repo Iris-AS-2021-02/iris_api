@@ -7,7 +7,7 @@ import koaCors from '@koa/cors';
 import { graphiqlKoa, graphqlKoa } from 'apollo-server-koa';
 import graphQLSchema from './graphQLSchema';
 import { formatErr } from './utilities';
-import { login, verifyAuthorization } from './authorization';
+import { login, register, verifyAuthorization } from './authorization';
 
 const app = new Koa();
 const router = new KoaRouter();
@@ -19,7 +19,7 @@ app.use(koaCors());
 
 // authorization
 app.use(async (ctx, next) => {
-	if(ctx.url === '/authorization/jwt'){
+	if(['/account/login', '/account/register'].includes(ctx.url)){
 		await next();
 	}
 	else{
@@ -36,8 +36,12 @@ const graphql = graphqlKoa((ctx) => ({
 	formatError: formatErr
 }));
 
-router.post("/authorization/jwt", koaBody(), async (ctx) => {
+router.post("/account/login", koaBody(), async (ctx) => {
     await login(ctx);
+});
+
+router.post("/account/register", koaBody(), async (ctx) => {
+    await register(ctx);
 });
 
 router.post('/graphql', koaBodyParser(), graphql);
