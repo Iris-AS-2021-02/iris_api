@@ -19,14 +19,14 @@ app.use(koaCors());
 
 // authorization
 app.use(async (ctx, next) => {
-	if(['/account/login', '/account/register'].includes(ctx.url)){
+	// if(['/account/login', '/account/register'].includes(ctx.url)){
 		await next();
-	}
-	else{
-		let isAuthorized = await verifyAuthorization(ctx);
-		if(isAuthorized)
-			await next();
-	}
+	// }
+	// else{
+	// 	let isAuthorized = await verifyAuthorization(ctx);
+	// 	if(isAuthorized)
+	// 		await next();
+	// }
 });
 
 // GraphQL
