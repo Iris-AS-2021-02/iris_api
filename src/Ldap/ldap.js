@@ -18,8 +18,12 @@ export function searchUserLDAP(userId){
             url: URL
         });
 
-        client.bind('cn=admin,dc=iris,dc=com', 'admin', (error)=>{
-            if(!error){
+        client.bind('cn=admin,dc=iris,dc=com', 'admin', (error, res)=>{
+            if(error){
+                resolve(error);
+            }
+            else{
+                console.log(res);
                 client.search('dc=iris,dc=com', opts, (error, res) => {
                     res.on('searchEntry', (entry) => { user = entry.object });
                     res.on('error', function(err){ reject(err) });
@@ -37,8 +41,13 @@ export function createUserLDAP(userId, name){
             url: URL
         });
         
-        let newDN = `cn=${name},ou=sa,dc=iris,dc=com`;
-        console.log(newDN, userId, name)
+        let cn = userId;
+        if(userId.includes('+')){
+            cn = userId.split('+')[1];
+        }
+
+        let newDN = `cn=${cn},ou=sa,dc=iris,dc=com`;
+        
         let fullName = name.split(' ');
         let firstName = fullName[0];
         let lastName = '';
@@ -52,21 +61,32 @@ export function createUserLDAP(userId, name){
             cn: name,
             uid: userId,
             userPassword: name,
-            objectClass: 'inetOrgPerson'
+            objectClass: [ 'inetOrgPerson', 'top' ]
         }
 
-        client.bind('cn=admin,dc=iris,dc=com', 'admin', (error)=>{
-            if(!error){
-                console.log("Conexión realizada")
-                client.add(newDN, newUser, (error) => {
-                    if(!error){
-                        console.log("Cliente agregado")
+        client.bind('cn=admin,dc=iris,dc=com', 'admin', (err)=>{
+            if(err){
+                reject(err);
+            }
+            else{
+                client.add(newDN, newUser, (err) => {
+                    if(err){
+                        reject(err);
+                    }
+                    else{
+                        let opts = {
+                            filter: `(&(objectClass=inetOrgPerson)(uid=${userId}))`,
+                            scope: 'sub',
+                            attributes: []
+                        }
                         client.search('dc=iris,dc=com', opts, (error, res) => {
-                            if(!error){
-                                console.log("Buscando")
+                            if(error){
+                                reject(error);
+                            }
+                            else{
                                 res.on('searchEntry', (entry) => { user = entry.object });
-                                res.on('error', function(err){ reject(err) });
-                                res.on('end', function(result){ resolve(user) });
+                                res.on('error', err => { reject(err) });
+                                res.on('end', () => { resolve(user) });
                             }
                         })
                     }

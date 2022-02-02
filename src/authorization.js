@@ -14,24 +14,26 @@ export async function login(ctx){
     try{
         let response = await axios.get(`${URL}/find/${payload.phone}`);
         let data = response.data[0];
-        const token = jwt.sign(payload, secretOrPrivateKey, options);
+
+        console.log(data);
         
         ctx.response.status = 401;
         ctx.response.body = { success: false, token: null };
         
         if(data.Name === payload.name){
-
+            
             let user = await searchUserLDAP(payload.phone);
             console.log(user);
-                if(user.cn === payload.name){
+                if(user.userPassword === payload.name){
+                    const token = jwt.sign(payload, secretOrPrivateKey, options);
                     ctx.response.status = 200;
-                    ctx.response.body = { success: true, token: token };
+                    ctx.response.body = { success: true, data: { token: token, user: data } };
                 }
         }
     }
     catch(e){
         ctx.response.status = 401;
-        ctx.response.body = { success: false, token: null };
+        ctx.response.body = { success: false, data: null };
         console.log(e);
     }
 }
@@ -43,7 +45,8 @@ export async function register(ctx){
     try{
         let response = await axios.post(URL, user);
         let data = response.data;
-        
+        console.log(data);
+
         if (data.ID != null){
             let createdUser = await createUserLDAP(user.Number, user.Name);
             console.log(user);
