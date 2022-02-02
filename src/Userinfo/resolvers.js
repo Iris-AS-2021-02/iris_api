@@ -12,8 +12,8 @@ const resolvers = {
 			generalRequest(`${URL}/user/${id}`, 'GET'),
 	},
 	Mutation: {
-		createUser: (_, { request}) =>
-			generalRequest(`${URL}/users`, 'POST', request),
+		// createUser: (_, { request}) =>
+		// 	generalRequest(`${URL}/users`, 'POST', request),
 		updateUserName: (_, { request}) =>
 			generalRequest(`${URL}/userName`, 'PATCH', request),
 		updateUserAbout: (_, { request}) =>
