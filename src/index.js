@@ -7,7 +7,7 @@ import koaCors from '@koa/cors';
 import { graphiqlKoa, graphqlKoa } from 'apollo-server-koa';
 import graphQLSchema from './graphQLSchema';
 import { formatErr } from './utilities';
-import { login, register, verifyAuthorization } from './authorization';
+import { login, register, verifyToken } from './account';
 
 const app = new Koa();
 const router = new KoaRouter();
@@ -23,7 +23,7 @@ app.use(async (ctx, next) => {
 		await next();
 	}
 	else{
-		let isAuthorized = await verifyAuthorization(ctx);
+		let isAuthorized = await verifyToken(ctx);
 		if(isAuthorized)
 			await next();
 	}

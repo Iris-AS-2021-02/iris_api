@@ -1,2 +1,3 @@
-export const url = 'host.docker.internal'
-export const port = '389'
+export const ldapUrl = 'host.docker.internal'
+export const ldapPort = '9000'
+export const ldapEntryPoint = 'ldap'

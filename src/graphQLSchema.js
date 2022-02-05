@@ -15,6 +15,12 @@ import {
 	contactQueries,
 	contactTypeDef
 } from './Contacts/typeDefs';
+
+import {
+	ldapMutations,
+	ldapQueries,
+	ldapTypeDef
+} from './Ldap/typeDefs';
 //Auth resolvers
 import {
 	userAuthMutations,
@@ -50,6 +56,7 @@ import {
 import messageResolvers from './Messages/resolvers';
 import userAuthResolvers from './Auth/resolvers';
 import contactResolvers from './Contacts/resolvers';
+import ldapResolvers from './Ldap/resolvers';
 import userPreferenceResolvers from './Preferences/resolvers';
 import callResolvers from './Calls/resolvers';
 import stateResolvers from './States/resolvers';
@@ -63,6 +70,7 @@ const mergedTypeDefs = mergeSchemas(
 		messageTypeDef,
 		userAuthTypeDef,
 		contactTypeDef,
+		ldapTypeDef,
 		userPreferenceTypeDef,
 		callTypeDef,
 		stateTypeDef,
@@ -73,6 +81,7 @@ const mergedTypeDefs = mergeSchemas(
 		messageQueries,
 		userAuthQueries,
 		contactQueries,
+		ldapQueries,
 		userPreferenceQueries,
 		callQueries,
 		stateQueries,
@@ -83,6 +92,7 @@ const mergedTypeDefs = mergeSchemas(
 		messageMutations,
 		userAuthMutations,
 		contactMutations,
+		ldapMutations,
 		userPreferenceMutations,
 		callMutations,
 		stateMutations,
@@ -99,6 +109,7 @@ export default makeExecutableSchema({
 		messageResolvers,
 		userAuthResolvers,
 		contactResolvers,
+		ldapResolvers,
 		userPreferenceResolvers,
 		callResolvers,
 		stateResolvers,

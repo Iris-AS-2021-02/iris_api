@@ -28,7 +28,7 @@ export const userInfoQueries = `
   `;
 
 export const userInfoMutations = `
-    createUser(request: UserIn!) : Response
+    createUserInfo(request: UserIn!) : Response
     updateUserName(request: UserIn!) : Response
     updateUserAbout(request: UserIn!) : Response
     updateUserCel(request: UserIn!) : Response

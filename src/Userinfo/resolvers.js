@@ -12,7 +12,7 @@ const resolvers = {
 			generalRequest(`${URL}/user/${id}`, 'GET'),
 	},
 	Mutation: {
-		createUser: (_, { request}) =>
+		createUserInfo: (_, { request}) =>
 			generalRequest(`${URL}/users`, 'POST', request),
 		updateUserName: (_, { request}) =>
 			generalRequest(`${URL}/userName`, 'PATCH', request),
