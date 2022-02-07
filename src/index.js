@@ -8,6 +8,11 @@ import { graphiqlKoa, graphqlKoa } from 'apollo-server-koa';
 import graphQLSchema from './graphQLSchema';
 import { formatErr } from './utilities';
 import { login, register, verifyToken } from './account';
+// import { dirname } from 'path/posix';
+
+const https = require('https');
+const path = require('path');
+const fs = require('fs');
 
 const app = new Koa();
 const router = new KoaRouter();
@@ -52,4 +57,11 @@ router.get('/graphiql', graphiqlKoa({ endpointURL: '/graphql' }));
 app.use(router.routes());
 app.use(router.allowedMethods());
 // eslint-disable-next-line
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+const options = {
+	key: fs.readFileSync(path.join('ssl', 'key.pem')),
+	cert: fs.readFileSync(path.join('ssl', 'cert.pem'))
+};
+
+const sslServer = https.createServer(options, app.callback());
+sslServer.listen(PORT, () => console.log(`Server running on port ${PORT}`));
