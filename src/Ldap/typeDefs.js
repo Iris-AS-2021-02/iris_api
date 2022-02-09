@@ -32,6 +32,6 @@ export const ldapMutations = `
         createLdapUser(account: Account!): LdapUser!
         getLdapUser(userAccount: UserAccount!): LdapUser!
         modifyLdapUser(account: Account!): LdapUser!
-        deleteLdapUser(userAccount: UserAccount!): String!
+        deleteLdapUser(userAccount: UserAccount!): String
         verifyAccount(account: Account!): ValidationMessage!
     `;

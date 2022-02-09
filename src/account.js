@@ -10,7 +10,7 @@ const LdapURL = `http://${ldapUrl}:${ldapPort}/${ldapEntryPoint}`;
 
 export async function login(ctx){
     const payload = { phone: ctx.request.body.phone, name: ctx.request.body.name};
-    const options = { expiresIn: 1440 };
+    const options = { expiresIn: '1h' };
     
     
     
